@@ -29,7 +29,7 @@ def do_submit(title: str, description: str) -> str:
 def do_kb_search(query: str, category: str) -> str:
     hits = kb.search_kb(query, category=None if category == "All" else category)
     if not hits:
-        return "No matching articles."
+        return "No relevant article found in the knowledge base."
     return "\n\n".join(
         f"**{h['title']}** ({h['category']})\n{h['body']}" for h in hits)
 

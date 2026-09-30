@@ -16,7 +16,7 @@ ticket (title + description)
 ├─ triage ─────────────── LLM triage (structured CATEGORY/PRIORITY/
 │                         CONFIDENCE/SUMMARY) with deterministic keyword
 │                         triage fallback in offline mode
-├─ kb_search ──────────── token-overlap search over 12 seeded IT/HR articles
+├─ kb_search ──────────── token-overlap search over 13 seeded IT/HR articles
 └─ resolve ────────────── creates the ticket, assigns the right team queue,
                           drafts a resolution, marks P1 / injection tickets
                           escalated
@@ -34,7 +34,7 @@ SLA sweep escalates open tickets past their sla_due (P1 4h, P2 8h, P3 24h, P4 72
 | `services/` | env-only config, multi-provider LLM factory (OpenAI/Gemini/Groq), injection detection, PII redaction, KB token-overlap search |
 | `agents/` | Pydantic contracts (`TriageDecision`, `KBArticle`, `TicketResult`) + intake/triage/KB/resolve nodes |
 | `graph/` | annotated `DeskState` TypedDict + LangGraph pipeline; `submit_ticket()` and `sla_sweep()` entry points |
-| `database/` | SQLite: `tickets`, `kb_articles` (12 seeded), append-only `audit_log` |
+| `database/` | SQLite: `tickets`, `kb_articles` (13 seeded), append-only `audit_log` |
 
 ## LLM providers
 

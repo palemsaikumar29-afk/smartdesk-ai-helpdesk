@@ -97,6 +97,14 @@ SEED_KB = [
      "security training, team introductions. Your buddy is assigned by your "
      "manager."),
      "onboarding,new-hire,i-9,training"),
+    ("HR", "Work from home policy",
+     ("Employees may work from home up to 3 days per week with manager "
+      "approval. Core collaboration hours are 10 AM-2 PM local time: keep "
+      "your calendar and chat status current during those hours. Remote work "
+      "requires a secure home setup - use the corporate VPN for internal "
+      "tools and keep company devices patched. Fully remote arrangements "
+      "need HR approval."),
+     "work-from-home,wfh,remote-work,remote,hybrid,telecommute"),
 ]
 
 # SLA hours per priority

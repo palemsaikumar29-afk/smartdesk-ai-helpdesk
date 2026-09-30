@@ -59,6 +59,26 @@ def test_kb_seed_count():
 
     conn = dbmod.get_conn()
     try:
-        assert conn.execute("SELECT COUNT(*) FROM kb_articles").fetchone()[0] == 12
+        assert conn.execute("SELECT COUNT(*) FROM kb_articles").fetchone()[0] == 13
     finally:
         conn.close()
+
+
+def test_kb_search_wfh_returns_wfh_article():
+    hits = kb.search_kb("What is the company's work from home policy?",
+                        category="HR")
+    assert hits and hits[0]["title"] == "Work from home policy"
+    assert hits[0]["category"] == "HR"
+
+
+def test_kb_search_offtopic_returns_no_match_signal():
+    # A lone common word ("policy") must not drag in unrelated HR policy
+    # articles: this query returned "Annual leave policy" before the
+    # relevance floor was added.
+    assert kb.search_kb("What is the policy regarding office parking "
+                        "for visitors?", category="HR") == []
+
+
+def test_kb_search_vpn_control():
+    hits = kb.search_kb("vpn")
+    assert hits and "VPN" in hits[0]["title"]
