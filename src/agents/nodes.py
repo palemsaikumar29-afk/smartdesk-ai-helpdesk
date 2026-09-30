@@ -17,7 +17,8 @@ _IT_WORDS = {
 _HR_WORDS = {
     "leave", "vacation", "pto", "payroll", "payslip", "salary", "benefits",
     "insurance", "harassment", "onboarding", "offboarding", "expense",
-    "reimbursement", "promotion", "resign",
+    "reimbursement", "promotion", "resign", "wfh", "work from home",
+    "remote work", "hybrid", "telecommute", "policy",
 }
 _SECURITY_WORDS = {
     "breach", "hack", "ransomware", "malware", "phishing", "intrusion",
@@ -165,6 +166,12 @@ def kb_node(state: dict) -> dict:
         f"{state['clean_title']} {state['clean_description']}",
         category=decision.category if not state.get("injection") else None,
     )
+    if not articles and not state.get("injection"):
+        # Triage is heuristic; a missed category should not hide a relevant
+        # article. Retry unfiltered before reporting no match. The relevance
+        # floor still applies, so unrelated queries return no match.
+        articles = kb.search_kb(
+            f"{state['clean_title']} {state['clean_description']}")
     return {"articles": articles}
 
 
