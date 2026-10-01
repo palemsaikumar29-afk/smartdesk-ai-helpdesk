@@ -1,6 +1,8 @@
 """Gradio UI: submit ticket, knowledge base, dashboard."""
 from __future__ import annotations
 
+import os
+
 import gradio as gr
 
 from src.database.db import get_conn, log_event
